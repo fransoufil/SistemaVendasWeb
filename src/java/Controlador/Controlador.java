@@ -43,7 +43,7 @@ public class Controlador extends HttpServlet {
             out.println("</html>");
         }
     }
-
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -70,7 +70,16 @@ public class Controlador extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String accion=request.getParameter("acao");
+        if(accion.equalsIgnoreCase("Ingressar")){
+            
+            String user=request.getParameter("txtuser");
+            String pass=request.getParameter("txtpassword");
+            
+        }else{
+            
+            
+        }
     }
 
     /**

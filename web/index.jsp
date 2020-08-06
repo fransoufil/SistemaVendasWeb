@@ -17,13 +17,13 @@
     <body>
         <div class="container mt-4 col-lg-4">
             
-            <div class="card">
+            <div class="card col-sm-10">
                 
-                <div class="card-body text-center">
+                <div class="card-body">
                     
-                    <form>
+                    <form class="form-sign" action="Validar" method="POST" >
                         
-                        <div class="form-group"> 
+                        <div class="form-group  text-center"> 
                             <h3>Sistema de Vendas WEB - Login</h3>
                             <img src="images/laptop.png" alt=""/>
                             <label>Bem Vindos ao Sistema!</label>
@@ -38,7 +38,7 @@
                             <label>Senha:</label>
                             <input type="password" name="txtpassword" class="form-control">
                         </div>
-                        <input type="submit" name="btningressar" value="Ingressar" class="btn btn-primary btn-block">
+                        <input type="submit" name="acao" value="Ingressar" class="btn btn-primary btn-block">
                         
                                                    
                     </form>
