@@ -1,0 +1,93 @@
+CREATE DATABASE dbVendasWeb;
+USE dbVendasWeb;
+
+CREATE TABLE IF NOT EXISTS `dbVendasWeb`.`cliente` (
+  `idcliente` INT(11) NOT NULL,
+  `rgcliente` VARCHAR(10) NULL,
+  `nomecliente` VARCHAR(244) NULL,
+  `cidadecliente` VARCHAR(244) NULL,
+  `estadocliente` VARCHAR(2) NULL,
+  PRIMARY KEY (`idcliente`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `dbVendasWeb`.`empregado`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `dbVendasWeb`.`empregado` (
+  `idempregado` INT(11) NOT NULL,
+  `rgempregado` VARCHAR(10) NULL,
+  `nomeempregado` VARCHAR(255) NULL,
+  `telefoneempregado` VARCHAR(11) NULL,
+  `estadoempregado` VARCHAR(2) NULL,
+  `usuario` VARCHAR(8) NULL,
+  PRIMARY KEY (`idempregado`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `dbVendasWeb`.`vendas`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `dbVendasWeb`.`vendas` (
+  `idvendas` INT(11) NOT NULL,
+  `idcliente` INT(11) NULL,
+  `idempregado` INT(11) NULL,
+  `numeroserie` VARCHAR(244) NULL,
+  `fechavenda` DATETIME NULL,
+  `montante` DOUBLE NULL,
+  `estadovenda` VARCHAR(2) NULL,
+  PRIMARY KEY (`idvendas`),
+  INDEX `fk_vendas_1_idx` (`idcliente` ASC) VISIBLE,
+  INDEX `fk_vendas_2_idx` (`idempregado` ASC) VISIBLE,
+  CONSTRAINT `fk_vendas_1`
+    FOREIGN KEY (`idcliente`)
+    REFERENCES `dbVendasWeb`.`cliente` (`idcliente`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_vendas_2`
+    FOREIGN KEY (`idempregado`)
+    REFERENCES `dbVendasWeb`.`empregado` (`idempregado`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `dbVendasWeb`.`produto`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `dbVendasWeb`.`produto` (
+  `idproduto` INT(11) NOT NULL,
+  `nomeproduto` VARCHAR(244) NULL,
+  `preco` DOUBLE NULL,
+  `estoque` INT(11) NULL,
+  `estadoproduto` VARCHAR(2) NULL,
+  PRIMARY KEY (`idproduto`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `dbVendasWeb`.`detalhe_vendas`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `dbVendasWeb`.`detalhe_vendas` (
+  `iddetalhe_vendas` INT(11) NOT NULL,
+  `idvendas` INT(11) NULL,
+  `idproduto` INT(11) NULL,
+  `Quantidade` INT(11) NULL,
+  `precovenda` DOUBLE NULL,
+  PRIMARY KEY (`iddetalhe_vendas`),
+  INDEX `fk_detalhe_vendas_1_idx` (`idvendas` ASC) VISIBLE,
+  INDEX `fk_detalhe_vendas_2_idx` (`idproduto` ASC) VISIBLE,
+  CONSTRAINT `fk_detalhe_vendas_1`
+    FOREIGN KEY (`idvendas`)
+    REFERENCES `dbVendasWeb`.`vendas` (`idvendas`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_detalhe_vendas_2`
+    FOREIGN KEY (`idproduto`)
+    REFERENCES `dbVendasWeb`.`produto` (`idproduto`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+

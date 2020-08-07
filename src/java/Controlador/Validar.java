@@ -70,7 +70,21 @@ public class Validar extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        String accion=request.getParameter("acao");
+        if(accion.equalsIgnoreCase("Ingressar")){
+            
+            String user=request.getParameter("txtuser");
+            String pass=request.getParameter("txtpassword");
+            
+            
+            
+        }else{
+            
+            
+        }
+        
+        
     }
 
     /**
